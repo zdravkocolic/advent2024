@@ -25,6 +25,8 @@ rl.question('Enter the file path: ', (filePath) => {
         });
 
         let distances: number[] = [];
+        let similarity: number[] = [];
+        let similaritySum: number = 0;
         let distanceSum: number = 0;
 
         list1.sort((a, b) => a - b);
@@ -38,9 +40,21 @@ rl.question('Enter the file path: ', (filePath) => {
             distanceSum += distances[i];
         }
 
+        const list2CountMap = new Map<number, number>();
+        list2.forEach(value => {
+            list2CountMap.set(value, (list2CountMap.get(value) || 0) + 1);
+        });
+
+        list1.forEach(value => {
+            if (list2CountMap.has(value)) {
+                similaritySum += value * list2CountMap.get(value)!;
+            }
+        });
+
         console.log('Sorted lists:', list1, list2);
         console.log('Distances:', distances);
         console.log('Distance sum:', distanceSum);
+        console.log('Similarity sum:', similaritySum);
         rl.close();
     });
 });

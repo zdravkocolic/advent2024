@@ -22,6 +22,8 @@ rl.question('Enter the file path: ', function (filePath) {
             list2.push(value2);
         });
         var distances = [];
+        var similarity = [];
+        var similaritySum = 0;
         var distanceSum = 0;
         list1.sort(function (a, b) { return a - b; });
         list2.sort(function (a, b) { return a - b; });
@@ -31,9 +33,19 @@ rl.question('Enter the file path: ', function (filePath) {
         for (var i = 0; i < distances.length; i++) {
             distanceSum += distances[i];
         }
+        var list2CountMap = new Map();
+        list2.forEach(function (value) {
+            list2CountMap.set(value, (list2CountMap.get(value) || 0) + 1);
+        });
+        list1.forEach(function (value) {
+            if (list2CountMap.has(value)) {
+                similaritySum += value * list2CountMap.get(value);
+            }
+        });
         console.log('Sorted lists:', list1, list2);
         console.log('Distances:', distances);
         console.log('Distance sum:', distanceSum);
+        console.log('Similarity sum:', similaritySum);
         rl.close();
     });
 });
