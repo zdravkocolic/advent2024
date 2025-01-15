@@ -44,6 +44,7 @@ rl.question('Enter the file path: ', (filePath) => {
         list2.forEach(value => {
             list2CountMap.set(value, (list2CountMap.get(value) || 0) + 1);
         });
+        console.log('List2:', list2CountMap);
 
         list1.forEach(value => {
             if (list2CountMap.has(value)) {
@@ -51,7 +52,6 @@ rl.question('Enter the file path: ', (filePath) => {
             }
         });
 
-        console.log('Sorted lists:', list1, list2);
         console.log('Distances:', distances);
         console.log('Distance sum:', distanceSum);
         console.log('Similarity sum:', similaritySum);

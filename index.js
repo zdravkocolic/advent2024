@@ -36,13 +36,13 @@ rl.question('Enter the file path: ', function (filePath) {
         var list2CountMap = new Map();
         list2.forEach(function (value) {
             list2CountMap.set(value, (list2CountMap.get(value) || 0) + 1);
+            console.log('List2:', list2CountMap);
         });
         list1.forEach(function (value) {
             if (list2CountMap.has(value)) {
                 similaritySum += value * list2CountMap.get(value);
             }
         });
-        console.log('Sorted lists:', list1, list2);
         console.log('Distances:', distances);
         console.log('Distance sum:', distanceSum);
         console.log('Similarity sum:', similaritySum);
